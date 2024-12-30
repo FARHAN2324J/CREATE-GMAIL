@@ -1,0 +1,92 @@
+:root {
+    --text-color: rgb(128, 109, 255);
+    --bg-color: rgb(195, 0, 255);
+    --size: 20px;
+    --color: rgb(2, 2, 17);
+    --font: monospace;
+    --weight: 600;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+body {
+    background-color: var(--color);
+    text-align: center;
+    padding: var(--size);
+    & #btn {
+        border: none;
+        padding: var(--size);
+        font-size: var(--size);
+        font-family: var(--font);
+        border-radius: var(--size);
+        background-image: linear-gradient(40deg, var(--bg-color), var(--text-color));
+        color: var(--color);
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        --angle: 0deg;  
+        margin: 0 auto; 
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            --angle: 0deg;
+            border-radius: inherit;
+            background-image: conic-gradient(from var(--angle), var(--color),  var(--text-color));
+            animation: me 1.5s linear infinite;
+            z-index: -1;
+            padding: 1px;
+        }
+        &:hover {
+            background-image: linear-gradient(300deg, var(--bg-color), var(--text-color));
+        }
+    }
+}
+
+@keyframes me {
+    to {
+        --angle:360deg;
+    }
+}
+
+& .container {
+    display: flex;
+    align-items: center;
+    gap: var(--size);
+    padding: var(--size);
+    justify-content: center;
+    & #p {
+        font-size: var(--size);
+        color: var(--text-color);
+        font-family: var(--font);
+        font-weight: var(--weight);
+    }
+    & button {
+        background-color: transparent;
+        border: none;
+        color: var(--bg-color);
+        font-size: 15px;
+        font-family: var(--font);
+        cursor: pointer;
+        display: none;
+    }
+    & .message {
+        padding: 5px;
+        background-color: var(--text-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: var(--size);
+        transition: opacity .5s;
+        font-family: var(--font);
+        opacity: 0;
+    }
+}
